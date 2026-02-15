@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>Gimolo Pilot</title>
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="bg" aria-hidden="true">
+    <div class="bgGradient"></div>
+    <div class="bgNoise"></div>
+    <div class="bgSparkles" id="bgSparkles"></div>
+  </div>
+
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <img class="brandLogo" src="logo.png" alt="Gimolo"/>
+        <div class="brandText">
+          <div class="brandName">Gimolo</div>
+          <div class="brandTag">tiny moves • real momentum</div>
+        </div>
+      </div>
+
+      <div class="topActions">
+        <button class="pillToggle" id="soundBtn" aria-pressed="true">
+          <span class="pillIcon">🔊</span>
+          <span class="pillLabel">Sound</span>
+          <span class="pillSwitch" aria-hidden="true"><span class="pillKnob"></span></span>
+        </button>
+        <button class="iconBtn" id="profileBtn" aria-label="Profile">👤</button>
+      </div>
+    </header>
+
+    <!-- SPIN -->
+    <section class="screen screen--active" id="screenSpin">
+      <section class="card card--soft card--dots">
+        <div class="cardHeader">
+          <div class="cardKicker">YOUR DOTS</div>
+          <div class="cardHint" id="dotsHint">Complete a move to add a dot.</div>
+        </div>
+        <div class="dotWorld" id="dotWorld"></div>
+      </section>
+
+      <section class="spinArea">
+        <button class="spinWheel" id="spinButton" aria-label="Spin">
+          <span class="wheelGlow"></span>
+          <span class="wheelText">SPIN</span>
+        </button>
+
+        <div class="microLine" id="microLine">Ready for a tiny spark?</div>
+        <div class="matchesLine" id="matchesLine">Matches: —</div>
+      </section>
+
+      <section class="personalityCard card card--soft">
+        <div class="personalityRow">
+          <div class="personalityTitle">Add personality</div>
+          <div class="personalitySub">Pick a tone that makes you smile.</div>
+        </div>
+        <div class="faces" role="tablist" aria-label="Personality">
+          <button class="face face--active" data-tone="classic" aria-selected="true">
+            <span class="faceEmoji">🙂</span><span class="faceName">Classic</span>
+          </button>
+          <button class="face" data-tone="supportive" aria-selected="false">
+            <span class="faceEmoji">😊</span><span class="faceName">Supportive</span>
+          </button>
+          <button class="face" data-tone="grumpy" aria-selected="false">
+            <span class="faceEmoji">😒</span><span class="faceName">Grumpy</span>
+          </button>
+        </div>
+      </section>
+
+      <nav class="bottomNav" aria-label="Navigation">
+        <button class="navBtn navBtn--active" id="navSpin" aria-current="page">
+          <span class="navIcon">🎡</span><span class="navText">Spin</span>
+        </button>
+        <button class="navBtn" id="navFilters">
+          <span class="navIcon">⚙️</span><span class="navText">Filters</span>
+        </button>
+        <button class="navBtn" id="navProfile">
+          <span class="navIcon">🟣</span><span class="navText">Profile</span>
+        </button>
+      </nav>
+    </section>
+
+    <!-- ACTIVITY -->
+    <section class="screen" id="screenActivity">
+      <section class="card card--main">
+        <div class="activityTop">
+          <div class="activityKicker">YOUR NEXT MOVE</div>
+          <button class="ghostBtn" id="backToSpinBtn">Back to Spin</button>
+        </div>
+
+        <div class="sparkLine" id="sparkLine">✨ Today’s Spark</div>
+        <h1 class="activityTitle" id="activityTitle">—</h1>
+        <p class="activityDesc" id="activityDesc">—</p>
+
+        <div class="pillRow" id="metaPills"></div>
+
+        <div class="ctaRow">
+          <button class="primaryBtn" id="startBtn">Start →</button>
+          <button class="secondaryBtn" id="spinAgainBtn">Spin again</button>
+        </div>
+      </section>
+    </section>
+
+    <!-- IN PROGRESS -->
+    <section class="screen" id="screenProgress">
+      <section class="card card--main">
+        <div class="activityTop">
+          <div class="activityKicker">IN PROGRESS</div>
+          <button class="ghostBtn" id="progressBackBtn">Back to Spin</button>
+        </div>
+
+        <h2 class="progressTitle" id="progressTitle">—</h2>
+        <div class="progressTone" id="progressTone">—</div>
+
+        <div class="timerWrap" id="timerWrap" style="display:none;">
+          <div class="timerBar"><div class="timerFill" id="timerFill"></div></div>
+          <div class="timerHint" id="timerHint">—</div>
+        </div>
+
+        <button class="primaryBtn" id="doneBtn">Mark as Done</button>
+      </section>
+    </section>
+
+    <!-- DONE -->
+    <section class="screen" id="screenDone">
+      <section class="card card--main card--done">
+        <div class="confetti" id="confetti" aria-hidden="true"></div>
+        <div class="activityKicker">DONE</div>
+        <h2 class="doneTitle" id="doneTitle">Nice.</h2>
+        <div class="doneHint" id="doneHint">Dot landed.</div>
+
+        <div class="nextRow">
+          <button class="chipBtn" data-next="keep">Keep this energy</button>
+          <button class="chipBtn" data-next="switch">Switch personality</button>
+          <button class="chipBtn" data-next="surprise">Surprise me</button>
+        </div>
+
+        <button class="primaryBtn" id="doneSpinBtn">Spin again</button>
+        <button class="secondaryBtn" id="doneCloseBtn">Close</button>
+      </section>
+    </section>
+
+    <!-- FILTERS SHEET -->
+    <div class="sheetBackdrop" id="sheetBackdrop" hidden></div>
+    <aside class="sheet" id="filtersSheet" aria-hidden="true" aria-label="Filters">
+      <div class="sheetHeader">
+        <div>
+          <div class="sheetTitle">Filters</div>
+          <div class="sheetSub">Pick what fits your moment.</div>
+        </div>
+        <button class="iconBtn" id="closeSheetBtn" aria-label="Close">✕</button>
+      </div>
+
+      <div class="sheetBody">
+        <label class="checkRow">
+          <input type="checkbox" id="communityOnly"/>
+          <span>Community actions only</span>
+        </label>
+
+        <div class="group">
+          <div class="groupTitle">Time</div>
+          <div class="segmented" role="radiogroup" aria-label="Time">
+            <button class="segBtn" data-time="5">5 min</button>
+            <button class="segBtn" data-time="10">10</button>
+            <button class="segBtn" data-time="+10">+10</button>
+          </div>
+        </div>
+
+        <label class="checkRow">
+          <input type="checkbox" id="soloOnly"/>
+          <span>Solo</span>
+        </label>
+
+        <div class="group">
+          <div class="groupTitle">Effort</div>
+          <div class="segmented" role="radiogroup" aria-label="Effort">
+            <button class="segBtn" data-effort="light">Light</button>
+            <button class="segBtn" data-effort="med">Med</button>
+            <button class="segBtn" data-effort="high">High</button>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="groupTitle">Location</div>
+          <div class="segmented" role="radiogroup" aria-label="Location">
+            <button class="segBtn" data-loc="indoor">Indoor</button>
+            <button class="segBtn" data-loc="outdoor">Outdoor</button>
+            <button class="segBtn" data-loc="either">Either</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sheetFooter">
+        <div class="matchesSmall" id="matchesSmall">Matches: —</div>
+        <button class="primaryBtn" id="applyFiltersBtn">Apply</button>
+      </div>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
