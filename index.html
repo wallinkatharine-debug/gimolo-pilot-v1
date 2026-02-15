@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gimolo Pilot v14</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="app">
+
+<header class="topbar">
+  <div class="brand">🌈 Gimolo</div>
+  <div class="controls">
+    <button id="soundBtn">🔊 Sound</button>
+    <button id="civicBtn">🌱 Civic</button>
+    <button id="profileBtn">👤 Profile</button>
+  </div>
+</header>
+
+<section id="spinScreen" class="screen active">
+  <div class="wheel" id="wheel">SPIN</div>
+  <div class="matches" id="matches">Matches: 370 • Tier: 1 • Scope: 1</div>
+</section>
+
+<section id="activityScreen" class="screen">
+  <div class="card">
+    <h2 id="activityTitle"></h2>
+    <p id="activityDesc"></p>
+    <div class="buttonRow">
+      <button class="primary" id="startBtn">Start →</button>
+      <button class="secondary" id="spinAgainBtn">Spin again</button>
+    </div>
+  </div>
+</section>
+
+<section id="progressScreen" class="screen">
+  <div class="card">
+    <h2>In Progress</h2>
+    <p id="progressTitle"></p>
+    <div class="progressBar">
+      <div class="progressFill" id="progressFill"></div>
+    </div>
+    <div class="buttonRow">
+      <button class="primary" id="doneBtn">Mark as Done</button>
+      <button class="secondary" id="backBtn">Back to Spin</button>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
